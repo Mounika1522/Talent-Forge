@@ -1,0 +1,26 @@
+{
+  "name": "talent-forge-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test \"tests/*.test.js\"",
+    "mail:stub": "node tests/helpers/smtp-stub-cli.js 2525 mails.jsonl"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.22.3",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "nodemailer": "^6.10.1"
+  },
+  "devDependencies": {
+    "smtp-server": "^3.21.3"
+  }
+}

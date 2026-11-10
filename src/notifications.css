@@ -1,0 +1,67 @@
+/* Notification bell, panel and lead-details modal. Uses the existing Alpha Auron red/white variables. */
+.tf-bell{position:relative;display:inline-flex}
+.tf-bell-btn{position:relative;width:44px;height:44px;display:grid;place-items:center;background:#fff;color:var(--ink);border:1px solid #e7dfe2;border-radius:9px;cursor:pointer;transition:border-color .2s,color .2s,transform .2s}
+.tf-bell-btn:hover{border-color:var(--red);color:var(--red)}
+.tf-bell-btn.has-unread{color:var(--red);border-color:#f2c4cc;background:var(--blush)}
+.tf-bell-btn[aria-expanded="true"]{border-color:var(--red);box-shadow:0 0 0 3px #bd1e3514}
+.tf-badge{position:absolute;top:-7px;right:-7px;min-width:20px;height:20px;padding:0 5px;display:grid;place-items:center;background:var(--red);color:#fff;border:2px solid #fff;border-radius:999px;font-size:10px;font-weight:800;line-height:1}
+.tf-bell-btn.ringing svg{animation:tf-ring 1.2s ease-in-out}
+@keyframes tf-ring{0%,100%{transform:rotate(0)}15%{transform:rotate(14deg)}30%{transform:rotate(-12deg)}45%{transform:rotate(9deg)}60%{transform:rotate(-6deg)}75%{transform:rotate(3deg)}}
+.tf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.tf-panel{position:absolute;right:0;top:calc(100% + 10px);width:min(400px,92vw);max-height:min(560px,78vh);display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px #601a2624;z-index:60;overflow:hidden;animation:tf-pop .16s ease-out}
+@keyframes tf-pop{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.tf-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px 10px}
+.tf-panel-head h2{font-family:Manrope,sans-serif;font-size:16px;margin:0}
+.tf-count{font-size:10px;font-weight:800;color:var(--red);background:#ffeaed;padding:4px 9px;border-radius:999px}
+.tf-tabs{display:flex;gap:6px;padding:0 18px 10px}
+.tf-tabs button{flex:1;min-height:34px;border:1px solid #e8dfe2;background:#fff;border-radius:8px;font-size:11px;font-weight:700;color:#514750;cursor:pointer}
+.tf-tabs button:hover{border-color:var(--red);color:var(--red)}
+.tf-tabs button.active{background:var(--red);border-color:var(--red);color:#fff}
+.tf-actions{display:flex;gap:8px;flex-wrap:wrap;padding:0 18px 12px;border-bottom:1px solid var(--line)}
+.tf-actions button{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 10px;border:0;background:var(--blush);color:var(--red-dark);border-radius:8px;font-size:11px;font-weight:700;cursor:pointer}
+.tf-actions button:hover:not(:disabled){background:#ffe3e7}
+.tf-actions button:disabled{opacity:.45;cursor:not-allowed}
+.tf-error{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 18px 0;padding:10px 12px;background:#fff1f2;border:1px solid #fecdd3;border-radius:9px;color:#9f1239;font-size:11px}
+.tf-error span{flex:1;min-width:150px}
+.tf-error button{display:inline-flex;align-items:center;gap:5px;border:1px solid #fda4af;background:#fff;color:#9f1239;border-radius:7px;padding:5px 9px;font-size:11px;font-weight:700;cursor:pointer}
+.tf-list{overflow-y:auto;min-height:120px}
+.tf-list ul{list-style:none;margin:0;padding:0}
+.tf-item{width:100%;display:flex;align-items:flex-start;gap:12px;padding:14px 18px;border:0;border-bottom:1px solid var(--line);background:#fff;text-align:left;cursor:pointer}
+.tf-item:hover{background:#fffafa}
+.tf-item.unread{background:var(--blush)}
+.tf-item.unread:hover{background:#ffeef0}
+.tf-dot{flex:none;width:9px;height:9px;margin-top:5px;border-radius:50%;background:transparent;border:1px solid #d9ced2}
+.tf-item.unread .tf-dot{background:var(--red);border-color:var(--red)}
+.tf-item-body{display:grid;gap:4px;min-width:0}
+.tf-item-body b{font-size:12px;color:var(--ink);overflow-wrap:anywhere}
+.tf-item:not(.unread) .tf-item-body b{font-weight:600;color:#6c616a}
+.tf-item-body small{font-size:10px;color:var(--muted);overflow-wrap:anywhere}
+.tf-state{display:flex;flex-direction:column;align-items:center;text-align:center;padding:34px 20px;gap:4px}
+.tf-state h3{font-size:14px;margin:10px 0 0}
+.tf-state p{font-size:11px;color:var(--muted);margin:0;max-width:260px;line-height:1.7}
+.tf-state-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:50%;background:#fff0f2;color:var(--red)}
+.tf-spinner{width:26px;height:26px;border-radius:50%;border:3px solid #f2dfe3;border-top-color:var(--red);animation:spin .8s linear infinite}
+
+@media(max-width:950px){
+  .tf-panel{position:fixed;left:10px;right:10px;top:84px;width:auto;max-height:calc(100vh - 100px)}
+}
+
+.tf-modal-backdrop{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px;background:#251d2399}
+.tf-modal{width:min(640px,100%);max-height:92vh;overflow-y:auto;background:#fff;border-radius:16px;padding:24px;box-shadow:0 24px 70px #251d2355;animation:tf-pop .16s ease-out}
+.tf-modal header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:16px}
+.tf-modal h2{font-family:Manrope,sans-serif;font-size:22px;margin:8px 0 0;overflow-wrap:anywhere}
+.tf-modal-close{flex:none;width:36px;height:36px;display:grid;place-items:center;border:1px solid #e7dfe2;background:#fff;border-radius:9px;cursor:pointer;color:var(--ink)}
+.tf-modal-close:hover{border-color:var(--red);color:var(--red)}
+.tf-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px;margin:0 0 20px}
+.tf-detail-grid dt{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#8b7f87;margin-bottom:4px}
+.tf-detail-grid dd{margin:0;font-size:12px;overflow-wrap:anywhere;white-space:pre-wrap}
+.tf-email-box{border-top:1px solid var(--line);padding-top:16px}
+.tf-email-box h3{font-family:Manrope,sans-serif;font-size:14px;margin:0 0 6px}
+.tf-email-box p{font-size:11px;color:var(--muted);line-height:1.7;margin:0 0 10px}
+.tf-email-box ul{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:6px}
+.tf-email-box li{display:flex;justify-content:space-between;gap:10px;font-size:11px;padding:8px 10px;border-radius:8px;background:#f0fdf4;color:#166534;overflow-wrap:anywhere}
+.tf-email-box li.bad{background:#fff1f2;color:#9f1239}
+.tf-resend-msg{margin-top:10px!important}
+@media(max-width:560px){.tf-detail-grid{grid-template-columns:1fr}.tf-modal{padding:18px}}
+@media(prefers-reduced-motion:reduce){.tf-bell-btn.ringing svg,.tf-panel,.tf-modal{animation:none}}
